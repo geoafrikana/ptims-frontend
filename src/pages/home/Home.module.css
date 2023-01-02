@@ -1,0 +1,19 @@
+.hero{
+  margin: 0;
+  padding:0;
+    width: 100%;
+    height: 90vh;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    background-color: yellow;
+  }
+
+  .content{
+    text-align:center;
+    font-size: 1.5rem;
+    font-family: raleway;
+    font-weight:1.5rem
+  }
+
+ 
