@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Axios from 'axios';
-import { MapContainer, TileLayer} from 'react-leaflet'
+import { MapContainer, Polygon, TileLayer} from 'react-leaflet'
 
 import Legend from './Legend'
 
 function WebMap() {
-  const EdoCenter = [6.446499,5.602304]
-  
+  const EdoCenter = [4.557437896728515, 7.491348249992404] //[6.446499,5.602304]
+
+  const purpleOptions = { color: 'purple' }
   const [allBuildings, setAllBuildings] = useState([])
-  const [dataIsLoading, setDataIsLoading] = useState(true)
   useEffect(()=>{
 
     const source = Axios.CancelToken.source();
@@ -19,7 +19,6 @@ function WebMap() {
           cancelToken: source.token});
     
         setAllBuildings(response.data);
-        setDataIsLoading(false);
       } catch (error){
       console.log(error.response)
     }
@@ -30,24 +29,22 @@ function WebMap() {
     };
     },[]);
 
-    if(!dataIsLoading){
+    const polyClick = (p)=>{
+      console.log(p)
+    }
+
+ if (allBuildings)
     return (
-      <MapContainer center={EdoCenter} zoom={16} scrollWheelZoom={true}>
-  <TileLayer
-    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />  
- </MapContainer>
-  
-  )}
- 
-    return (
-      <MapContainer center={EdoCenter} zoom={16} scrollWheelZoom={true}>
+      <MapContainer center={EdoCenter} zoom={12} scrollWheelZoom={true}>
+        
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  <Legend data_prop={allBuildings}/>
+  {
+  allBuildings.map((building, index) => <Polygon key={`polygon-${index}`} eventHandlers={{ click: ()=>polyClick(building) }} pathOptions={purpleOptions} positions={building.poly.coordinates} />)
+  }
+  <Legend />
   
  </MapContainer>
   
