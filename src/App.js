@@ -9,6 +9,7 @@ import TaxAssessment from './pages/taxAssessment/TaxAssessment';
 function App() {
   return (
     <>
+
     <Navbar />
     <Routes>
       <Route path="/" element={<Home />} />

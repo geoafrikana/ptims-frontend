@@ -1,0 +1,25 @@
+.overlay{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    z-index: 1000;
+    background-color:white;
+    padding: 20px 50px 10px 20px;
+    border: 2px solid gray;
+    opacity:0.9;
+    border-radius: 20px;
+    display:flex;
+    align-items:center;
+    justify-content: flex-end;
+    }
+    
+    .visible{
+        display: block
+    }
+    
+    .hidden{
+        display: none
+    }
